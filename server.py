@@ -16,8 +16,21 @@ DEFAULT_CATALOG = [
     "poster": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80",
     "rating": 9.8,
     "episodes": [
-      { "number": 1, "title": "1-qism", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-      { "number": 2, "title": "2-qism", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
+      { "number": 1, "title": "1-qism: I'm Used to It", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+      { "number": 2, "title": "2-qism: If I Had One More Chance", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+      { "number": 3, "title": "3-qism: It's Like a Game", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
+    ]
+  },
+  {
+    "id": "naruto-shippuden",
+    "title": "Naruto Shippuden",
+    "type": "anime",
+    "country": "Japan",
+    "poster": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80",
+    "rating": 9.9,
+    "episodes": [
+      { "number": 1, "title": "1-qism: Uyga qaytish", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+      { "number": 2, "title": "2-qism: Akatsuki harakatga keldi", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" }
     ]
   },
   {
@@ -25,10 +38,11 @@ DEFAULT_CATALOG = [
     "title": "Soul Land (Douluo Dalu)",
     "type": "donghua",
     "country": "China",
-    "poster": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80",
+    "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
     "rating": 9.6,
     "episodes": [
-      { "number": 1, "title": "1-qism", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
+      { "number": 1, "title": "1-qism: Rebirth in Douluo Dalu", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyplays.mp4" },
+      { "number": 2, "title": "2-qism: Blue Silver Grass", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" }
     ]
   },
   {
@@ -39,7 +53,8 @@ DEFAULT_CATALOG = [
     "poster": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
     "rating": 9.5,
     "episodes": [
-      { "number": 1, "title": "1-qism", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" }
+      { "number": 1, "title": "1-qism: The Fallen Prodigy", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+      { "number": 2, "title": "2-qism: Mysterious Ring", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" }
     ]
   },
   {
@@ -50,7 +65,19 @@ DEFAULT_CATALOG = [
     "poster": "https://images.unsplash.com/photo-1563089145-599997674d42?w=600&auto=format&fit=crop&q=80",
     "rating": 9.7,
     "episodes": [
-      { "number": 1, "title": "1-qism", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
+      { "number": 1, "title": "1-qism: Cruelty", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+      { "number": 2, "title": "2-qism: Trainer Sakonji Urokodaki", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" }
+    ]
+  },
+  {
+    "id": "a-will-eternal",
+    "title": "A Will Eternal (Yi Nian Yong Heng)",
+    "type": "donghua",
+    "country": "China",
+    "poster": "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&auto=format&fit=crop&q=80",
+    "rating": 9.4,
+    "episodes": [
+      { "number": 1, "title": "1-qism: Lighting the Incense", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" }
     ]
   }
 ]
