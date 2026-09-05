@@ -7,70 +7,6 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, 'data', 'catalog.json')
 
-DEFAULT_CATALOG = [
-  {
-    "id": "slime-season-4",
-    "title": "Shilliq sifatida qayta tug'ildim (4-mavsum)",
-    "nativeTitle": "Tensei Shitara Slime Datta Ken",
-    "type": "anime",
-    "country": "Japan",
-    "poster": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
-    "rating": 9.9,
-    "episodes": [
-      { 
-        "number": 21, 
-        "title": "21-qism: Rimuru va Yangi Jang", 
-        "url": "https://02d3353f9a5908eac488df6e53cd5783.r2.cloudflarestorage.com/animemedia/shilliq%2021.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cb0776bab8450d94f0e6acb7be82cb20%2F20260905%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260905T195626Z&X-Amz-Expires=1800&X-Amz-SignedHeaders=host&X-Amz-Signature=6f18cefae988ee792b071309243584705166026fd323f695e4f18f84ab6ed557" 
-      }
-    ]
-  },
-  {
-    "id": "solo-leveling",
-    "title": "Solo Leveling",
-    "type": "anime",
-    "country": "Japan",
-    "poster": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80",
-    "rating": 9.8,
-    "episodes": [
-      { "number": 1, "title": "1-qism: I'm Used to It", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-      { "number": 2, "title": "2-qism: If I Had One More Chance", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
-    ]
-  },
-  {
-    "id": "naruto-shippuden",
-    "title": "Naruto Shippuden",
-    "type": "anime",
-    "country": "Japan",
-    "poster": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80",
-    "rating": 9.9,
-    "episodes": [
-      { "number": 1, "title": "1-qism: Uyga qaytish", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" }
-    ]
-  },
-  {
-    "id": "soul-land",
-    "title": "Soul Land (Douluo Dalu)",
-    "type": "donghua",
-    "country": "China",
-    "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
-    "rating": 9.6,
-    "episodes": [
-      { "number": 1, "title": "1-qism: Rebirth in Douluo Dalu", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyplays.mp4" }
-    ]
-  },
-  {
-    "id": "btth",
-    "title": "Battle Through the Heavens",
-    "type": "donghua",
-    "country": "China",
-    "poster": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
-    "rating": 9.5,
-    "episodes": [
-      { "number": 1, "title": "1-qism: The Fallen Prodigy", "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" }
-    ]
-  }
-]
-
 def load_catalog():
     if os.path.exists(DATA_FILE):
         try:
@@ -80,7 +16,7 @@ def load_catalog():
                     return data
         except Exception:
             pass
-    return DEFAULT_CATALOG
+    return []
 
 @app.route('/')
 def index():
