@@ -3,59 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AniDong - Anime & Donghua Platformasi</title>
+  <title>AniDong - Anime & Donghua Streaming Platformasi</title>
   
-  <!-- Tailwind CSS (Dizayn uchun) -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome (Belgilar/Ikonkalar uchun) -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <style>
-    body { background-color: #0a0c14; color: #f3f4f6; font-family: sans-serif; }
-    .glass { background: rgba(24, 28, 48, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+    body { background-color: #0a0c14; color: #f3f4f6; font-family: 'Outfit', sans-serif; }
+    .glass { background: rgba(24, 28, 48, 0.7); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.1); }
+    .glass-card { background: rgba(24, 28, 48, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s ease; }
+    .glass-card:hover { transform: translateY(-5px); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.3); }
+    .gradient-text { background: linear-gradient(135deg, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glow-btn { background: linear-gradient(135deg, #8b5cf6, #ec4899); box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4); }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col antialiased selection:bg-purple-500 selection:text-white">
 
-  <!-- 1-BOSQICH: Yuqori menyu (Header) -->
-  <header class="p-4 border-b border-white/10 flex items-center justify-between glass sticky top-0 z-50">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl bg-purple-600 flex items-center justify-center font-bold text-white">AD</div>
-      <h1 class="text-xl font-black tracking-wide text-purple-400">AniDong</h1>
+  <!-- TOP NAVIGATION -->
+  <header class="sticky top-0 z-50 glass px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-white/10">
+    <div class="flex items-center gap-4">
+      <a href="#" onclick="filterType('all')" class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center font-black text-white shadow-lg shadow-purple-500/30">AD</div>
+        <span class="text-2xl font-black gradient-text">AniDong</span>
+      </a>
+
+      <!-- Category Filter Tabs -->
+      <nav class="hidden md:flex bg-white/5 p-1 rounded-xl border border-white/5 gap-1">
+        <button onclick="filterType('all')" id="tab-all" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-purple-600 text-white transition-all">Barchasi</button>
+        <button onclick="filterType('anime')" id="tab-anime" class="px-4 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all">🇯🇵 Anime</button>
+        <button onclick="filterType('donghua')" id="tab-donghua" class="px-4 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all">🇨🇳 Donghua</button>
+      </nav>
     </div>
 
-    <!-- Kategoriyalar -->
-    <div class="flex gap-2">
-      <button onclick="filterType('all')" class="px-3 py-1.5 rounded-lg bg-purple-600 text-xs font-bold text-white">Barchasi</button>
-      <button onclick="filterType('anime')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-gray-300">🇯🇵 Anime</button>
-      <button onclick="filterType('donghua')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-gray-300">🇨🇳 Donghua</button>
+    <!-- Search Input -->
+    <div class="relative w-48 sm:w-72">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+      <input type="text" id="search-input" onkeyup="searchShows(this.value)" placeholder="Anime yoki Donghua izlash..." 
+             class="w-full bg-white/5 text-xs text-white pl-9 pr-3 py-2 rounded-xl border border-white/10 focus:border-purple-500 focus:outline-none transition-all">
     </div>
   </header>
 
-  <!-- 2-BOSQICH: Katalog Qismi -->
-  <main class="max-w-6xl mx-auto p-4 flex-grow w-full">
-    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-      <span>Seriallar Ro'yxati</span>
-    </h2>
+  <!-- MAIN CATALOG -->
+  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 flex-grow w-full">
+    
+    <!-- Hero Banner -->
+    <div class="relative rounded-3xl overflow-hidden mb-10 h-64 sm:h-80 bg-gradient-to-r from-purple-900/80 to-pink-900/80 border border-white/10 flex items-center p-6 sm:p-10">
+      <div class="max-w-xl z-10">
+        <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase bg-pink-500 text-white tracking-wider mb-3 inline-block">Tavsiya Etamiz</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-2">Solo Leveling & Soul Land</h2>
+        <p class="text-xs sm:text-sm text-gray-300 mb-6 line-clamp-2">Eng yaxshi yapon va xitoy animatsiyalarini yuqori sifatda onlayn tomosha qiling.</p>
+        <button onclick="filterType('all')" class="glow-btn px-6 py-2.5 rounded-xl font-bold text-xs text-white flex items-center gap-2">
+          <i class="fa-solid fa-play"></i> Tomosha Qilish
+        </button>
+      </div>
+      <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-cover bg-center opacity-30 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800');"></div>
+    </div>
 
-    <!-- Anime/Donghua kartalari chiqariladigan joy -->
-    <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      <!-- JavaScript orqali to'ldiriladi -->
+    <!-- Catalog Section Title -->
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-xl font-black text-white tracking-tight flex items-center gap-2">
+        <span>Katalog Ro'yxati</span>
+        <span id="count-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-400 font-bold border border-purple-500/30">0 ta</span>
+      </h3>
+
+      <!-- Mobile Filter -->
+      <div class="flex md:hidden gap-1 bg-white/5 p-1 rounded-xl">
+        <button onclick="filterType('all')" class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-purple-600 text-white">Barchasi</button>
+        <button onclick="filterType('anime')" class="px-2.5 py-1 text-[11px] font-bold rounded-md text-gray-400">🇯🇵 Anime</button>
+        <button onclick="filterType('donghua')" class="px-2.5 py-1 text-[11px] font-bold rounded-md text-gray-400">🇨🇳 Donghua</button>
+      </div>
+    </div>
+
+    <!-- Catalog Grid -->
+    <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
+      <!-- Dynamic Items -->
     </div>
   </main>
 
-  <!-- 3-BOSQICH: Video Player Modali -->
-  <div id="player-modal" class="hidden fixed inset-0 z-50 bg-black/90 p-4 flex items-center justify-center">
-    <div class="glass max-w-4xl w-full rounded-2xl p-4 flex flex-col gap-4">
-      <div class="flex justify-between items-center">
-        <h3 id="player-title" class="font-bold text-lg text-white">Video Player</h3>
-        <button onclick="closePlayer()" class="text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+  <!-- VIDEO PLAYER MODAL -->
+  <div id="player-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md p-4 flex flex-col justify-center items-center overflow-y-auto">
+    <div class="glass max-w-4xl w-full rounded-2xl p-4 sm:p-6 border border-white/10 flex flex-col gap-4">
+      <div class="flex justify-between items-center pb-2 border-b border-white/10">
+        <div>
+          <h3 id="player-title" class="font-bold text-lg text-white">Video Player</h3>
+          <p id="player-ep-title" class="text-xs text-purple-400 font-semibold">1-qism</p>
+        </div>
+        <button onclick="closePlayer()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
       </div>
-      <video id="main-video" controls class="w-full aspect-video bg-black rounded-xl"></video>
-      <div id="episodes-list" class="flex gap-2 overflow-x-auto pb-2"></div>
+
+      <!-- Player Frame -->
+      <div class="aspect-video bg-black rounded-xl overflow-hidden border border-white/10">
+        <video id="main-video" controls class="w-full h-full object-contain"></video>
+      </div>
+
+      <!-- Episode Switcher -->
+      <div>
+        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Qismlar Ro'yxati:</h4>
+        <div id="episodes-list" class="flex flex-wrap gap-2"></div>
+      </div>
     </div>
   </div>
 
-  <script src="/static/js/app.js"></script>
+  <footer class="bg-[#06080e] border-t border-white/5 py-6 px-4 text-center text-xs text-gray-500 mt-auto">
+    <p>&copy; 2026 AniDong - Anime & Donghua Online Streaming Platformasi</p>
+  </footer>
+
+  <!-- EMBEDDED JAVASCRIPT LOGIC -->
+  <script>
+    let catalogData = [];
+    let currentType = 'all';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/catalog')
+        .then(res => res.json())
+        .then(data => {
+          catalogData = data;
+          renderCatalog(catalogData);
+        })
+        .catch(err => console.error(err));
+    });
+
+    function renderCatalog(items) {
+      const grid = document.getElementById('catalog-grid');
+      document.getElementById('count-badge').innerText = `${items.length} ta show`;
+
+      if (!items.length) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-400 text-sm">Afsus, hech narsa topilmadi</div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(item => `
+        <div onclick="openPlayer('${item.id}')" class="glass-card rounded-2xl overflow-hidden cursor-pointer p-3 flex flex-col justify-between">
+          <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-gray-900">
+            <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover">
+            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[10px] font-extrabold ${item.type === 'donghua' ? 'bg-pink-600 text-white' : 'bg-purple-600 text-white'}">
+              ${item.type === 'donghua' ? '🇨🇳 Donghua' : '🇯🇵 Anime'}
+            </span>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-white line-clamp-1 mb-1">${item.title}</h4>
+            <div class="flex justify-between items-center text-xs text-gray-400">
+              <span>${item.episodes ? item.episodes.length : 1} qism</span>
+              <span class="text-amber-400 font-bold">★ ${item.rating || 9.5}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterType(type) {
+      currentType = type;
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.replace('bg-purple-600', 'text-gray-400'));
+      const activeBtn = document.getElementById(`tab-${type}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-purple-600', 'text-white');
+        activeBtn.classList.remove('text-gray-400');
+      }
+
+      if (type === 'all') {
+        renderCatalog(catalogData);
+      } else {
+        const filtered = catalogData.filter(i => i.type === type);
+        renderCatalog(filtered);
+      }
+    }
+
+    function searchShows(query) {
+      if (!query.trim()) {
+        filterType(currentType);
+        return;
+      }
+      const q = query.toLowerCase();
+      const results = catalogData.filter(i => i.title.toLowerCase().includes(q) || i.type.toLowerCase().includes(q));
+      renderCatalog(results);
+    }
+
+    function openPlayer(id) {
+      const show = catalogData.find(x => x.id === id);
+      if (!show || !show.episodes) return;
+
+      document.getElementById('player-title').innerText = show.title;
+      playEpisode(show.episodes[0].url, show.episodes[0].number);
+
+      const epList = document.getElementById('episodes-list');
+      epList.innerHTML = show.episodes.map(ep => `
+        <button onclick="playEpisode('${ep.url}', ${ep.number})" class="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold transition-all">
+          ${ep.number}-qism
+        </button>
+      `).join('');
+
+      document.getElementById('player-modal').classList.remove('hidden');
+    }
+
+    function playEpisode(url, num) {
+      document.getElementById('player-ep-title').innerText = `${num}-qism`;
+      const video = document.getElementById('main-video');
+      video.src = url;
+      video.play().catch(() => {});
+    }
+
+    function closePlayer() {
+      const video = document.getElementById('main-video');
+      video.pause();
+      document.getElementById('player-modal').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>
