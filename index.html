@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AniDong - Anime & Donghua Platformasi</title>
+  
+  <!-- Tailwind CSS (Dizayn uchun) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome (Belgilar/Ikonkalar uchun) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    body { background-color: #0a0c14; color: #f3f4f6; font-family: sans-serif; }
+    .glass { background: rgba(24, 28, 48, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- 1-BOSQICH: Yuqori menyu (Header) -->
+  <header class="p-4 border-b border-white/10 flex items-center justify-between glass sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-purple-600 flex items-center justify-center font-bold text-white">AD</div>
+      <h1 class="text-xl font-black tracking-wide text-purple-400">AniDong</h1>
+    </div>
+
+    <!-- Kategoriyalar -->
+    <div class="flex gap-2">
+      <button onclick="filterType('all')" class="px-3 py-1.5 rounded-lg bg-purple-600 text-xs font-bold text-white">Barchasi</button>
+      <button onclick="filterType('anime')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-gray-300">🇯🇵 Anime</button>
+      <button onclick="filterType('donghua')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-gray-300">🇨🇳 Donghua</button>
+    </div>
+  </header>
+
+  <!-- 2-BOSQICH: Katalog Qismi -->
+  <main class="max-w-6xl mx-auto p-4 flex-grow w-full">
+    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+      <span>Seriallar Ro'yxati</span>
+    </h2>
+
+    <!-- Anime/Donghua kartalari chiqariladigan joy -->
+    <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <!-- JavaScript orqali to'ldiriladi -->
+    </div>
+  </main>
+
+  <!-- 3-BOSQICH: Video Player Modali -->
+  <div id="player-modal" class="hidden fixed inset-0 z-50 bg-black/90 p-4 flex items-center justify-center">
+    <div class="glass max-w-4xl w-full rounded-2xl p-4 flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <h3 id="player-title" class="font-bold text-lg text-white">Video Player</h3>
+        <button onclick="closePlayer()" class="text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <video id="main-video" controls class="w-full aspect-video bg-black rounded-xl"></video>
+      <div id="episodes-list" class="flex gap-2 overflow-x-auto pb-2"></div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
